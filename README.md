@@ -108,8 +108,6 @@ tests/test_create_user.py ....                        [100%]
 - [Clean Architecture - Robert C. Martin](https://www.amazon.com.br/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
 - [Domain-Driven Design - Eric Evans](https://www.amazon.com.br/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)
 - [Documentação do Pytest](https://docs.pytest.org/)
-- [Curso de Python com TDD na Prática (gratuito)](https://app.rocketseat.com.br/)
-
 ---
 
 ## 🧑‍💻 Autor
