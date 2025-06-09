@@ -20,7 +20,7 @@ class SimpleUseReposit:
         self.users.append(user)
         return True
 
-# Case of test
+#  Create Case of test
 
 class  CreateUseCaseUser:
     def __init__(self,user_repo):
