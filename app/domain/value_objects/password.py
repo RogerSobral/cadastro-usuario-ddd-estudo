@@ -12,8 +12,8 @@ class Password:
     # Verificação vinda do banco de dados para não converter duas vezes
     @classmethod
     def from_hashed(cls, hashed_value: bytes):
-        obj = cls.__new__(cls)        # Cria a instância sem chamar __init__
-        obj.__value = hashed_value    # Atribui o hash diretamente
+        obj = cls.__new__(cls)        
+        obj.__value = hashed_value    
         return obj
 
     def _valid_strong_password(self,password:str):
@@ -33,3 +33,11 @@ class Password:
     @property
     def value(self):
         return self.__value
+
+    def __eq__(self, other):
+        if isinstance(other,Password):
+            return self.__value==other.__value
+        
+
+    def __str__(self):
+        return "****"
