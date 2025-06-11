@@ -1,10 +1,13 @@
 import re
 import bcrypt 
+from app.domain.exceptions.exceptions_passwords import StrongPasswordInvalid
+
+
 
 class Password:
     def __init__(self, passwordInput:str):
         if not self._valid_strong_password(password=passwordInput):
-            raise ValueError("A senha deve conter pelo menos 6 caracteres, incluindo letra maiúscula, minúscula, número e símbolo.")
+            raise StrongPasswordInvalid("A senha deve conter pelo menos 6 caracteres, incluindo letra maiúscula, minúscula, número e símbolo.")
         self.__value=self._hash(passwordInput)
 
 
@@ -18,10 +21,8 @@ class Password:
 
     def _valid_strong_password(self,password:str):
         pattern = r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[#&*@!$]).{6,}$'
-        if re.search(pattern,password):
-            return True
-        else:
-            return False
+        return re.search(pattern,password) is not None
+    
         
     def _hash (self,password:str)-> bytes:
         return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
