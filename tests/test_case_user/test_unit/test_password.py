@@ -3,8 +3,8 @@ from app.domain.exceptions.exceptions_passwords import StrongPasswordInvalid
 import pytest
 import bcrypt
 
-def test_valid_password():
-    # caso não va ele vai lançar um erro
+def test_valid_password_succefful():
+   
     password=Password("1@35Aa")
 
 

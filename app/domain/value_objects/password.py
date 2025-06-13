@@ -1,3 +1,5 @@
+
+
 import re
 import bcrypt 
 from app.domain.exceptions.exceptions_passwords import StrongPasswordInvalid
