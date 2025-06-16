@@ -1,3 +1,4 @@
+from app.domain.services.jwt_service import generate_token
 
 """Esse caso de uso vai:
 
@@ -25,7 +26,7 @@ class AuthenticateUserUseCase:
             raise ValueError("Senha inválida")
 
         # 3. (Opcional) Gerar token JWT, se necessário
-        token = gerar_token(user)
+        token = generate_token(user)
         return {"user": user, "token": token}
         
 
