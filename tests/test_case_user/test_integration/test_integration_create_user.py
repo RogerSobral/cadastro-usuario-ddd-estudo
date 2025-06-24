@@ -1,12 +1,16 @@
 import pytest
-from app.domain.entities.user import User
-from app.domain.exceptions.exceptions_email import ExceptionsEmail
-from app.domain.exceptions.exceptions_passwords import StrongPasswordInvalid
-from app.domain.exceptions.exceptions_name import InvalidNameError
+from app.domain.authentication.entities.user import User
+from app.domain.authentication.exceptions.exceptions_email import ExceptionsEmail
+from app.domain.authentication.exceptions.exceptions_passwords import StrongPasswordInvalid
+from app.domain.authentication.exceptions.exceptions_name import InvalidNameError
+
+class TestableUser(User):
+    def __init__(self, name, email, password):
+        super().__init__(name, email, password)
 
 
 def test_create_user_successful():
-    usuario=User(name="carlos",email="carlos@gmail.com",password="StrongP@ss1")
+    usuario=TestableUser(name="carlos",email="carlos@gmail.com",password="StrongP@ss1")
     assert usuario.name=="carlos"
     assert usuario.email=="carlos@gmail.com"
     assert usuario.password.verify("StrongP@ss1")
@@ -24,7 +28,7 @@ def test_create_user_successful():
 
 def test_name_user_falid(invalid_name):
     with pytest.raises(InvalidNameError):
-         User(name=invalid_name,email="carlos@gmail.com",password="StrongP@ss1")   
+         TestableUser(name=invalid_name,email="carlos@gmail.com",password="StrongP@ss1")   
 
 
 
@@ -50,7 +54,7 @@ def test_name_user_falid(invalid_name):
 
 def test_create_invalid_email(badEmail):
     with pytest.raises(ExceptionsEmail):
-       User(name="carlos",email=badEmail,password="StrongP@ss1") 
+       TestableUser(name="carlos",email=badEmail,password="StrongP@ss1") 
 
 
 @pytest.mark.parametrize("bad_password",[
@@ -65,4 +69,4 @@ def test_create_invalid_email(badEmail):
 
 def test_create_invalid_email(bad_password):
     with pytest.raises(StrongPasswordInvalid):
-       User(name="carlos",email="carlos@gmail.com",password=bad_password) 
+       TestableUser(name="carlos",email="carlos@gmail.com",password=bad_password) 

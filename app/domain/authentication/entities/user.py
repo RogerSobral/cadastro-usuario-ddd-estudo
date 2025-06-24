@@ -1,9 +1,11 @@
 import re
-from app.domain.value_objects.password import Password
-from app.domain.value_objects.email import Email
-from app.domain.exceptions.exceptions_name import InvalidNameError
+from authentication.value_objects.password  import Password
+from authentication.value_objects.email import Email
+from authentication.exceptions.exceptions_name import InvalidNameError
+from abc import ABC,abstractmethod
 
-class User:
+
+class User(ABC):
 
     def __init__(self,name,email,password):
         self.__name=self._valid_name(name)

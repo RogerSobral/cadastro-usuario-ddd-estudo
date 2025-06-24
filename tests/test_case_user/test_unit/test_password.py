@@ -1,5 +1,5 @@
-from app.domain.value_objects.password import Password
-from app.domain.exceptions.exceptions_passwords import StrongPasswordInvalid
+from app.domain.authentication.value_objects.password import Password
+from app.domain.authentication.exceptions.exceptions_passwords import StrongPasswordInvalid
 import pytest
 import bcrypt
 

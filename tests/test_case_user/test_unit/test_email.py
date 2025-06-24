@@ -1,6 +1,6 @@
 import pytest
-from app.domain.value_objects.email import Email
-from app.domain.exceptions.exceptions_email import ExceptionsEmail
+from app.domain.authentication.value_objects.email import Email
+from app.domain.authentication.exceptions.exceptions_email import ExceptionsEmail
 
 def test_valid_email():
     # Cria um objeto Email válido

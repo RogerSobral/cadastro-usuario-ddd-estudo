@@ -1,4 +1,4 @@
-from app.domain.services.jwt_service import generate_token
+from app.domain.authentication.services.jwt_service import generate_token
 
 
 class AuthenticateUserUseCase:
