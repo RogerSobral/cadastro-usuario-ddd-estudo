@@ -10,8 +10,16 @@ Este projeto é um exemplo didático de como organizar uma aplicação de cadast
 cadastro-usuarios-ddd/
 ├── app/
 │   ├── domain/
-│   │   ├── entities/
-│   │   │   └── user.py
+│   │   ├── authentication/
+│   ├── entities/
+│   │   └── user.py
+│   ├── value_objects/
+│   │   ├── email.py
+│   │   └── password.py
+│   ├── exceptions/
+│   │   └── authentication_error.py
+│   └── services/
+│       └── jwt_service.py
 │   ├── repositories/
 │   │   └── in_memory_user_repository.py
 │   └── use_cases/
