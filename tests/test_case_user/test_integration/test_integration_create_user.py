@@ -4,16 +4,21 @@ from app.domain.authentication.exceptions.exceptions_email import ExceptionsEmai
 from app.domain.authentication.exceptions.exceptions_passwords import StrongPasswordInvalid
 from app.domain.authentication.exceptions.exceptions_name import InvalidNameError
 
-class TestableUser(User):
+
+class FakeUser (User):
     def __init__(self, name, email, password):
         super().__init__(name, email, password)
 
 
-def test_create_user_successful():
-    usuario=TestableUser(name="carlos",email="carlos@gmail.com",password="StrongP@ss1")
-    assert usuario.name=="carlos"
-    assert usuario.email=="carlos@gmail.com"
-    assert usuario.password.verify("StrongP@ss1")
+
+@pytest.fixture
+def testableUser ():
+    return FakeUser (name="carlos", email="carlos@gmail.com", password="StrongP@ss1")
+
+def test_create_user_successful(testableUser ):
+    assert testableUser .name == "carlos"
+    assert testableUser .email == "carlos@gmail.com"
+    assert testableUser .password.verify("StrongP@ss1")
 
 
 @pytest.mark.parametrize("invalid_name", [
@@ -28,7 +33,7 @@ def test_create_user_successful():
 
 def test_name_user_falid(invalid_name):
     with pytest.raises(InvalidNameError):
-         TestableUser(name=invalid_name,email="carlos@gmail.com",password="StrongP@ss1")   
+         FakeUser(name=invalid_name,email="carlos@gmail.com",password="StrongP@ss1")   
 
 
 
@@ -54,7 +59,7 @@ def test_name_user_falid(invalid_name):
 
 def test_create_invalid_email(badEmail):
     with pytest.raises(ExceptionsEmail):
-       TestableUser(name="carlos",email=badEmail,password="StrongP@ss1") 
+       FakeUser(name="carlos",email=badEmail,password="StrongP@ss1") 
 
 
 @pytest.mark.parametrize("bad_password",[
@@ -69,4 +74,4 @@ def test_create_invalid_email(badEmail):
 
 def test_create_invalid_email(bad_password):
     with pytest.raises(StrongPasswordInvalid):
-       TestableUser(name="carlos",email="carlos@gmail.com",password=bad_password) 
+       FakeUser(name="carlos",email="carlos@gmail.com",password=bad_password) 

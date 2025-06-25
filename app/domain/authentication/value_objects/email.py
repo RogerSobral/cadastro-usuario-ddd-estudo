@@ -1,5 +1,5 @@
 import re
-from authentication.exceptions.exceptions_email import ExceptionsEmail
+from app.domain.authentication.exceptions.exceptions_email import ExceptionsEmail
 
 
 class Email:

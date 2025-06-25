@@ -1,8 +1,8 @@
 import re
-from authentication.value_objects.password  import Password
-from authentication.value_objects.email import Email
-from authentication.exceptions.exceptions_name import InvalidNameError
-from abc import ABC,abstractmethod
+from app.domain.authentication.value_objects.password  import Password
+from app.domain.authentication.value_objects.email import Email
+from app.domain.authentication.exceptions.exceptions_name import InvalidNameError
+from abc import ABC
 
 
 class User(ABC):
