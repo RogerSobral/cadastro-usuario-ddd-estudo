@@ -7,3 +7,4 @@ class FakeRepositoryUsers:
 
 def test_authenticate_user_successful():
     validadUser=AuthenticateUserUseCase().execute()
+    
