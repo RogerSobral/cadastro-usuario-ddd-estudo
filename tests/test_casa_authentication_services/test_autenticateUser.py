@@ -47,3 +47,25 @@ def test_authenticate_user_successful(fake_repository):
     assert user.name=="Carlos"
     assert user.email=="carlos@gmail.com"
     
+
+# Testes adicionais
+
+# 2) Email inexistente
+
+# Verificar se o sistema levanta exceção ao tentar autenticar com um email que não está no repositório.
+
+
+# 3) Senha incorreta
+
+# Validar que a senha errada, mesmo com email correto, gera erro e não retorna token.
+
+
+# 4) Token gerado com chave ausente
+
+# Simular ausência da SECRET_KEY no ambiente e confirmar que a exceção "Não há Key secret" é de fato levantada.
+
+
+
+# 5) Token expirado
+
+# Criar token com exp no passado e tentar decodificá-lo para ver se é rejeitado (isso envolve o uso de jwt.decode).
