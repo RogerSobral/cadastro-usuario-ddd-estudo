@@ -48,9 +48,18 @@ def test_authenticate_user_successful(fake_repository):
     assert user.email=="carlos@gmail.com"
     
 
+def test_autheticate_user_falid(fake_repository):
+    # Criar uma excessão para email nao encontrado
+    with pytest.raises()
+    validadUser=AuthenticateUserUseCase(fake_repository)
+    with validadUser.execute("carl@gmail.com","1@35Aa")
+
+
 # Testes adicionais
 
 # 2) Email inexistente
+
+
 
 # Verificar se o sistema levanta exceção ao tentar autenticar com um email que não está no repositório.
 
