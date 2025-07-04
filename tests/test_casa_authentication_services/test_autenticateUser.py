@@ -3,6 +3,8 @@ from app.application.use_cases.authenticate_user import AuthenticateUserUseCase
 from app.domain.authentication.value_objects.email import Email
 from app.domain.authentication.value_objects.password import Password
 from app.domain.authentication.entities.user import User
+from app.domain.authentication.exceptions.exceptions_email import ExceptionsEmailNotFound
+import os
 
 
 class FakeUser (User):
@@ -40,6 +42,7 @@ def fake_repository():
     return FakeRepositoryUsers()           
     
 def test_authenticate_user_successful(fake_repository):
+    os.environ["JWT_SECRET"] = "uma-chave-secreta-de-teste"
     validadUser=AuthenticateUserUseCase(fake_repository)
     result=validadUser.execute("carlos@gmail.com","1@35Aa")
     user=result["user"]
@@ -48,16 +51,16 @@ def test_authenticate_user_successful(fake_repository):
     assert user.email=="carlos@gmail.com"
     
 
-def test_autheticate_user_falid(fake_repository):
-    # Criar uma excessão para email nao encontrado
-    with pytest.raises()
-    validadUser=AuthenticateUserUseCase(fake_repository)
-    with validadUser.execute("carl@gmail.com","1@35Aa")
 
 
 # Testes adicionais
 
 # 2) Email inexistente
+# def test_authenticate_user_fail_email_not_found(fake_repository):
+#     # Criar uma excessão para email nao encontrado
+#     with pytest.raises(ExceptionsEmailNotFound, match="Email não encontrado"):
+#         validadUser=AuthenticateUserUseCase(fake_repository)
+#         validadUser.execute("carl@gmail.com","1@35Aa")
 
 
 

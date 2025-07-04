@@ -1,4 +1,5 @@
 from app.domain.authentication.services.jwt_service import generate_token
+from app.domain.authentication.exceptions.exceptions_email import ExceptionsEmailNotFound
 
 
 class AuthenticateUserUseCase:
@@ -10,7 +11,7 @@ class AuthenticateUserUseCase:
         # 1. Busca o usuário no banco pelo email
         user = self.user_repository.search_by_email(email)
         if not user:
-            raise ValueError("Email não encontrado")
+            raise ExceptionsEmailNotFound()
 
         # 2. Verifica a senha
         if not user.password.verify(password):
