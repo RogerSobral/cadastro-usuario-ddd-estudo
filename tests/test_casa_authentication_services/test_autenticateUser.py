@@ -4,6 +4,7 @@ from app.domain.authentication.value_objects.email import Email
 from app.domain.authentication.value_objects.password import Password
 from app.domain.authentication.entities.user import User
 from app.domain.authentication.exceptions.exceptions_email import ExceptionsEmailNotFound
+from app.domain.authentication.exceptions.exceptions_passwords import IncorrectPasswordException
 import os
 
 
@@ -22,7 +23,7 @@ class FakeRepositoryUsers:
             {"id": 1, "name": "Carlos", "email": "carlos@gmail.com", "password": "1@35Aa"},
             {"id": 2, "name": "Maria",  "email": "maria@gmail.com",  "password": "835@Aa"},
             {"id": 3, "name": "Pedro",  "email": "pedro@gmail.com",  "password": "pe5@Aa"},
-        ]
+        ]  
 
         listUsers = []
         for user in raw_users:
@@ -33,7 +34,7 @@ class FakeRepositoryUsers:
         for user in self.dictUsers():
             if user.email==email:
                 return user      
-        raise ValueError("Erro ao procurar o email")
+        raise ExceptionsEmailNotFound()
                 
 
 
@@ -56,20 +57,21 @@ def test_authenticate_user_successful(fake_repository):
 # Testes adicionais
 
 # 2) Email inexistente
-# def test_authenticate_user_fail_email_not_found(fake_repository):
-#     # Criar uma excessão para email nao encontrado
-#     with pytest.raises(ExceptionsEmailNotFound, match="Email não encontrado"):
-#         validadUser=AuthenticateUserUseCase(fake_repository)
-#         validadUser.execute("carl@gmail.com","1@35Aa")
+def test_authenticate_user_fail_email_not_found(fake_repository):
+    with pytest.raises(ExceptionsEmailNotFound, match="Email não encontrado"):
+        validadUser=AuthenticateUserUseCase(fake_repository)
+        validadUser.execute("carl@gmail.com","1234")
 
 
-
-# Verificar se o sistema levanta exceção ao tentar autenticar com um email que não está no repositório.
 
 
 # 3) Senha incorreta
 
-# Validar que a senha errada, mesmo com email correto, gera erro e não retorna token.
+def test_authenticate_user_incorrect_password(fake_repository):
+    with pytest.raises(IncorrectPasswordException, match="assword invalido"):
+        validadUser=AuthenticateUserUseCase(fake_repository)
+        validadUser.execute("carlos@gmail.com","1@12")
+
 
 
 # 4) Token gerado com chave ausente

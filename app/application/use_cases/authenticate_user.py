@@ -1,5 +1,6 @@
 from app.domain.authentication.services.jwt_service import generate_token
 from app.domain.authentication.exceptions.exceptions_email import ExceptionsEmailNotFound
+from app.domain.authentication.exceptions.exceptions_passwords import IncorrectPasswordException
 
 
 class AuthenticateUserUseCase:
@@ -15,7 +16,7 @@ class AuthenticateUserUseCase:
 
         # 2. Verifica a senha
         if not user.password.verify(password):
-            raise ValueError("Senha inválida")
+            raise IncorrectPasswordException()
 
         # 3. (Opcional) Gerar token JWT, se necessário
         token = generate_token(user)
